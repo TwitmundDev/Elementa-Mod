@@ -1,0 +1,27 @@
+name: ElementaModeration
+author: Twitmund
+version: 1.0
+main: fr.twitmund.Main
+commands:
+  mod:
+    description: Commande pour passer en mode modération
+
+  freeze:
+    description: freeze un joueur
+  nick:
+    description: ne fonctionne pas
+
+  sreport:
+    description: Voir tout le reports d'un joueur
+  report:
+    description: Report un joueur
+
+
+  warn:
+    description: warn un joueur
+
+  swarn:
+    description: voir les warn un joueur
+
+  push:
+    description: voir les warn un joueur
