@@ -13,15 +13,14 @@ Plugin Eelemanta Modearation crée par Twitmund
 - [@TwitmundDev](https://www.github.com/TwitmundDev)
 
 
-
 ## Bd example
 
 
 | reports | warns     | 
 | :-------- | :------- |
-| `id (Auto incrémenté)` || `id (Auto incrémenté)` |
-| `username` || `username` |
-| `uuid` || `uuid` |
-| `date` || `date` |
-| `auteur` || `auteur` |
-| `raison` || `raison` |
+| `id (Auto incrémenté)` | `id (Auto incrémenté)` |
+| `username` | `username` |
+| `uuid` | `uuid` |
+| `date` | `date` |
+| `auteur` | `auteur` |
+| `raison` | `raison` |
