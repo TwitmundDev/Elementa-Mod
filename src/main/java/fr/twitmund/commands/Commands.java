@@ -178,6 +178,12 @@ public class Commands implements CommandExecutor {
             Inventory invReports  = Bukkit.createInventory(null, 5*9, ChatColor.GRAY +"Reports de "+ChatColor.RED+target.getDisplayName());
             AtomicInteger i = new AtomicInteger();
             reports.forEach(r -> {
+                if (i.intValue() > 45){
+
+                    player.sendMessage("ce joueur a trop de report + 45");
+                    return;
+                }
+
                 ItemBuilder report = new ItemBuilder(Material.ENCHANTED_BOOK).setName(ChatColor.WHITE.BOLD + r.getReason()).setLore(ChatColor.DARK_PURPLE +"Report par : "+ChatColor.BLUE + r.getAuthor(),ChatColor.DARK_PURPLE+ "Le : "+ ChatColor.BLUE + r.getDate());
                 invReports.setItem(i.get(), report.toItemStack());
                 i.getAndIncrement();
@@ -242,6 +248,12 @@ public class Commands implements CommandExecutor {
             Inventory invWarns  = Bukkit.createInventory(null, 5*9, ChatColor.GRAY +"Warns de "+ChatColor.RED+target.getDisplayName());
             AtomicInteger i = new AtomicInteger();
             warns.forEach(r -> {
+                if (i.intValue() > 45){
+
+                    player.sendMessage("ce joueur a trop de warn + 45");
+                    return;
+                }
+
                 ItemBuilder report = new ItemBuilder(Material.ENCHANTED_BOOK).setName(ChatColor.WHITE.BOLD + r.getReason()).setLore(ChatColor.DARK_PURPLE +"Warn par : "+ChatColor.BLUE + r.getAuthor(),ChatColor.DARK_PURPLE+ "Le : "+ ChatColor.BLUE + r.getDate());
                 invWarns.setItem(i.get(), report.toItemStack());
                 i.getAndIncrement();

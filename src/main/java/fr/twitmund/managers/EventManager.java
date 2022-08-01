@@ -18,6 +18,7 @@ public class EventManager {
         pm.registerEvents(new OnModQuit(), Main.getInstance());
         pm.registerEvents(new SreportInteract(),Main.getInstance());
         pm.registerEvents(new SwarnInteract(),Main.getInstance());
+        pm.registerEvents(new CensureEvent(),Main.getInstance());
         //pm.registerEvents(new PlayerPush(),Main.getInstance());
     }
 }
