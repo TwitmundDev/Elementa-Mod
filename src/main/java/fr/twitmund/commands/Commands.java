@@ -129,6 +129,10 @@ public class Commands implements CommandExecutor {
             player.openInventory(inv);
         }
         if (arg.equalsIgnoreCase("freeze")){
+            if (!player.hasPermission("elemanta.mod")) {
+                player.sendMessage(Main.getInstance().elementa +ChatColor.RED + "Vous n'avez pas la permission de faire cela");
+                return false;
+            }
             if (args.length != 1 ){
                 player.sendMessage(Main.getInstance().elementa + ChatColor.GRAY +"Veuillez préciser le pseudo d'un joueur");
                 return false;
@@ -161,6 +165,10 @@ public class Commands implements CommandExecutor {
 
         }
         if (arg.equalsIgnoreCase("sreport")){
+            if (!player.hasPermission("elemanta.mod")) {
+                player.sendMessage(Main.getInstance().elementa +ChatColor.RED + "Vous n'avez pas la permission de faire cela");
+                return false;
+            }
             if (args.length != 1 ){
                 player.sendMessage(Main.getInstance().elementa + ChatColor.GRAY +"Veuillez préciser le pseudo d'un joueur");
                 return false;
@@ -200,6 +208,10 @@ public class Commands implements CommandExecutor {
 
 
         if (arg.equalsIgnoreCase("warn")){
+            if (!player.hasPermission("elemanta.mod")) {
+                player.sendMessage(Main.getInstance().elementa +ChatColor.RED + "Vous n'avez pas la permission de faire cela");
+                return false;
+            }
 
             String targetName = args[0];
             Player target = Bukkit.getPlayer(targetName);
@@ -230,6 +242,10 @@ public class Commands implements CommandExecutor {
         }
 
         if (arg.equalsIgnoreCase("swarn")){
+            if (!player.hasPermission("elemanta.mod")) {
+                player.sendMessage(Main.getInstance().elementa +ChatColor.RED + "Vous n'avez pas la permission de faire cela");
+                return false;
+            }
             if (args.length != 1 ){
                 player.sendMessage(Main.getInstance().elementa + ChatColor.GRAY +"Veuillez préciser le pseudo d'un joueur");
                 return false;
@@ -269,9 +285,59 @@ public class Commands implements CommandExecutor {
         }
 
 
-        if (arg.equalsIgnoreCase("push")){
+        if (arg.equalsIgnoreCase("heal")){
+            if (!player.hasPermission("elemanta.mod")) {
+                player.sendMessage(Main.getInstance().elementa +ChatColor.RED + "Vous n'avez pas la permission de faire cela");
+                return false;
+            }
+            if (args.length != 1 ){
+                player.setHealth((double) player.getMaxHealth());
+                return false;
+            }
+            String targetName = args[0];
+            Player target = Bukkit.getPlayer(targetName);
+
+            if (Bukkit.getPlayer(targetName) ==  null){
+                player.sendMessage(Main.getInstance().elementa + ChatColor.GRAY +"Le joueur n'est pas en ligne ");
+                return false;
+            }
+
+            target.setHealth((double) target.getMaxHealth());
+            player.sendMessage(Main.getInstance().elementa +ChatColor.GREEN + "Vous avez heal " +ChatColor.GRAY+ChatColor.BOLD + targetName);
+
+
 
         }
+
+
+
+
+
+        if (arg.equalsIgnoreCase("s")){
+            if (!player.hasPermission("elemanta.mod")) {
+                player.sendMessage(Main.getInstance().elementa +ChatColor.RED + "Vous n'avez pas la permission de faire cela");
+                return false;
+            }
+            if (args.length != 1 ){
+                player.sendMessage(Main.getInstance().elementa + ChatColor.GRAY +"Veuillez préciser le pseudo d'un joueur");
+                return false;
+            }
+            String targetName = args[0];
+            Player targetPlayer = Bukkit.getPlayer(targetName);
+            Location playerLoc = player.getLocation();
+
+            if (Bukkit.getPlayer(targetName) ==  null){
+                player.sendMessage(Main.getInstance().elementa + ChatColor.GRAY +"Le joueur n'est pas en ligne ");
+                return false;
+            }
+
+            targetPlayer.teleport(playerLoc);
+            player.sendMessage(Main.getInstance().elementa +ChatColor.GREEN + "Vous avez téléporté " +
+                    ChatColor.GRAY+ChatColor.BOLD+ targetName +ChatColor.RESET + ChatColor.GREEN+ " sur vous");
+
+
+        }
+
 
 
 

@@ -24,4 +24,10 @@ commands:
     description: voir les warn un joueur
 
   push:
-    description: voir les warn un joueur
+    description: none
+
+  heal:
+    description: heal un joueur
+
+  s:
+    description: tp un joueur sur sois

@@ -57,6 +57,12 @@ public final class Main extends JavaPlugin {
         getCommand("warn").setExecutor(new Commands());
         getCommand("swarn").setExecutor(new Commands());
         getCommand("push").setExecutor(new Commands());
+
+        //Commandes Utilitaires
+        getCommand("heal").setExecutor(new Commands());
+        getCommand("s").setExecutor(new Commands());
+
+
         new EventManager().registers();
         initConnection();
         reports = new Reports();
