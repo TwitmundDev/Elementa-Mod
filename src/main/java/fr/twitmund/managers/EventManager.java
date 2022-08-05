@@ -1,6 +1,7 @@
 package fr.twitmund.managers;
 
 import fr.twitmund.Main;
+import fr.twitmund.anticheat.module.combat.ReachA;
 import fr.twitmund.listeners.*;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
@@ -21,6 +22,13 @@ public class EventManager {
         pm.registerEvents(new CensureEvent(),Main.getInstance());
         pm.registerEvents(new AntiKbEvent(),Main.getInstance());
         pm.registerEvents(new MuteEvent(),Main.getInstance());
+
+        /**
+         * Anti CHEAT
+         */
+        pm.registerEvents(new ReachA(),Main.getInstance());
+
+
         //pm.registerEvents(new PlayerPush(),Main.getInstance());
     }
 }

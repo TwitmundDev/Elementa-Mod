@@ -22,7 +22,7 @@ public class AntiKbEvent implements Listener {
     @EventHandler
     public void onPlayerDamagedEvent(PlayerVelocityEvent e){
 
-        e.getPlayer().setVelocity(new Vector( 0,0.3,0));
+        e.getPlayer().setVelocity(new Vector( 0,0,0));
 
     }
 }

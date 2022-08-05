@@ -53,7 +53,7 @@ public class ModCancels implements Listener {
     public void onEntityDamageByEntity(EntityDamageByEntityEvent e){
         if(!(e.getEntity() instanceof Player)) return;
         if(!(e.getDamager() instanceof Player)) return;
-        Player damager= (Player) e.getDamager();
+        Player damager = (Player) e.getDamager();
 
         if (PlayerManager.isInMod(damager)){
             e.setCancelled(damager.getInventory().getItemInHand().getType()!= Material.STICK);

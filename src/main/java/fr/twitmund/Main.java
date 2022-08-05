@@ -111,6 +111,32 @@ public final class Main extends JavaPlugin {
 
 
 
+    public void notification(@NotNull String notification,@NotNull Player player , String warningLvl, String reachlvl){
+        instance = this;
+        for (Player players : Bukkit.getOnlinePlayers()) {
+            if (players.hasPermission("elementa.Wanrings")) {
+
+                switch (notification){
+                    case "reach":
+                        players.sendMessage( Main.getInstance().elementa + ChatColor.GRAY + "Le joueur : "
+                                + ChatColor.RED + ChatColor.BOLD + player.getDisplayName()
+                                +ChatColor.RESET + ChatColor.GRAY + "est suspecter de " + notification + " " + warningLvl+
+                                "\n Reach de " + reachlvl);
+                            break;
+                    default:
+                        players.sendMessage( Main.getInstance().elementa + ChatColor.GRAY + "Le joueur : " + ChatColor.RED + ChatColor.BOLD + player.getDisplayName()
+                                +ChatColor.RESET + ChatColor.GRAY + " est suspecter de " + notification + " " + warningLvl);
+                        break;
+                }
+
+
+            }
+        }
+    }
+
+
+
+
     /**
      *
      * @GETTER
