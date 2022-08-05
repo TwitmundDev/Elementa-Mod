@@ -28,6 +28,12 @@ public class CensureEvent implements Listener {
         Player player = e.getPlayer();
         String playerName = player.getName();
 
+
+        if (Main.getInstance().isPlayerMuted(player)){
+            return;
+
+        }
+
         final List<String> bannedWord = Arrays.asList(
                 "Connard",
                 "fdp",
@@ -56,20 +62,12 @@ public class CensureEvent implements Listener {
                 for (Player players : Bukkit.getOnlinePlayers()) {
                     if (players.hasPermission("elementa.Wanrings")) {
                         players.sendMessage( Main.getInstance().elementa + ChatColor.GRAY + "Le joueur " + player.getDisplayName() +
-                                "A été warn pour Propos innapropriée mot utilisée " + msg);
+                                " à été warn pour Propos innapropriée mot utilisée " + msg);
                     }
                 }
             }
         }
 
-        // for (Player players : Bukkit.getOnlinePlayers()) {
-        //     if (players.hasPermission("elementa.Wanrings")) {
-        //
-        //         players.sendMessage(ChatColor.RED + "Le joueur " + player.getDisplayName() + "A utiliser un ban Word");
-        //
-        //     }
-        //     }
-        //     }
 
     }
 }

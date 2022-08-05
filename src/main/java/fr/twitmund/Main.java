@@ -5,17 +5,15 @@ import fr.twitmund.db.Mysql;
 import fr.twitmund.db.Reports;
 import fr.twitmund.db.Warns;
 import fr.twitmund.managers.EventManager;
-import fr.twitmund.managers.FreezeRunnable;
 import fr.twitmund.managers.PlayerManager;
-import fr.twitmund.managers.Report;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -35,6 +33,7 @@ public final class Main extends JavaPlugin {
 
     public ArrayList<UUID> moderateurs  =  new ArrayList<>();
     public HashMap<UUID, PlayerManager> players  = new HashMap<>();
+    public HashMap<UUID, Long> mutedPlayers  = new HashMap<UUID, Long>();
     public Map<UUID, Location> freeze = new HashMap<>();
 
 
@@ -57,6 +56,15 @@ public final class Main extends JavaPlugin {
         getCommand("warn").setExecutor(new Commands());
         getCommand("swarn").setExecutor(new Commands());
         getCommand("push").setExecutor(new Commands());
+        /*
+        Commandes de mute
+         */
+        getCommand("mute").setExecutor(new Commands());
+        getCommand("showmuted").setExecutor(new Commands());
+        getCommand("ismuted").setExecutor(new Commands());
+        getCommand("unmute").setExecutor(new Commands());
+        getCommand("timelast").setExecutor(new Commands());
+
 
         //Commandes Utilitaires
         getCommand("heal").setExecutor(new Commands());
@@ -145,6 +153,36 @@ public final class Main extends JavaPlugin {
     public Reports getReports() {
         return reports;
     }
+
+
+
+    public HashMap<UUID, Long> getMutedPlayers() {
+        return mutedPlayers;
+    }
+
+    public long getTimeLeft(@NotNull Player player){
+        UUID playerUUID = player.getUniqueId();
+
+
+        long timeLeftParse =  mutedPlayers.get(playerUUID);
+        long timeleft = timeLeftParse - System.currentTimeMillis();
+
+
+
+        return timeleft;
+    }
+    public boolean isPlayerMuted(@NotNull Player player){
+        boolean isMuted = false;
+        if (getMutedPlayers().containsKey(player.getUniqueId())){
+            isMuted = true;
+        }else {
+            isMuted =false;
+        }
+
+        return isMuted;
+    }
+
+
 }
 
 

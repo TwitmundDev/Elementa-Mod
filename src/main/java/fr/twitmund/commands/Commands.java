@@ -5,6 +5,7 @@ import fr.twitmund.managers.PlayerManager;
 import fr.twitmund.managers.Report;
 import fr.twitmund.managers.Warn;
 import fr.twitmund.utils.ItemBuilder;
+import fr.twitmund.utils.TimeUnit;
 import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -14,15 +15,15 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.util.Vector;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Commands implements CommandExecutor {
+    /**
+     *
+     * @TODO La commande + le systeme de tempmute
+     */
 
 
 
@@ -220,6 +221,10 @@ public class Commands implements CommandExecutor {
             for (int i = 1; i <args.length ; i++) {
                 reason = reason +" "+ args[i];
             }
+            if (reason.length() <1){
+                player.sendMessage(Main.getInstance().elementa + ChatColor.GRAY +"Veuillez préciser une raison");
+                return false;
+            }
 
             if (args.length < 1 ){
                 player.sendMessage(Main.getInstance().elementa + ChatColor.GRAY +"Veuillez préciser le pseudo d'un joueur");
@@ -338,6 +343,142 @@ public class Commands implements CommandExecutor {
 
         }
 
+
+
+        /*
+
+
+
+
+        Commandes de mutes
+
+
+
+
+
+         */
+
+
+        if (arg.equalsIgnoreCase("mute")) {
+            if (!player.hasPermission("elemanta.mod")) {
+                player.sendMessage(Main.getInstance().elementa + ChatColor.RED + "Vous n'avez pas la permission de faire cela");
+                return false;
+            }
+            if (args.length != 1) {
+                player.sendMessage(Main.getInstance().elementa + ChatColor.GRAY + "Veuillez préciser le pseudo d'un joueur");
+                return false;
+            }
+            String targetName = args[0];
+            Player target = Bukkit.getPlayer(targetName);
+
+            Player targetPlayer = Bukkit.getPlayer(targetName);
+
+            try {
+                Main.getInstance().mutedPlayers.put(target.getUniqueId(), System.currentTimeMillis() + 10800000L);
+                player.sendMessage(Main.getInstance().elementa +"Vous avez mute : " +ChatColor.RED + ChatColor.BOLD+ targetName);
+            }catch (Exception e){
+                player.sendMessage(ChatColor.RED + "Une erreur est survenue lors de l'ajout du joueur dans la liste mutedPlayers");
+            }
+
+        }
+
+
+        if (arg.equalsIgnoreCase("showmuted")) {
+            if (!player.hasPermission("elemanta.mod")) {
+                player.sendMessage(Main.getInstance().elementa + ChatColor.RED + "Vous n'avez pas la permission de faire cela");
+                return false;
+            }
+            player.sendMessage(Main.getInstance().elementa +"Voici toutes les personnes mute"+ Main.getInstance().getMutedPlayers());
+
+            }
+
+        if (arg.equalsIgnoreCase("ismuted")) {
+            if (!player.hasPermission("elemanta.mod")) {
+                player.sendMessage(Main.getInstance().elementa + ChatColor.RED + "Vous n'avez pas la permission de faire cela");
+                return false;
+            }
+            if (args.length != 1) {
+                player.sendMessage(Main.getInstance().elementa + ChatColor.GRAY + "Veuillez préciser le pseudo d'un joueur");
+                return false;
+            }
+            String targetName = args[0];
+            Player target = Bukkit.getPlayer(targetName);
+
+
+            if (Main.getInstance().isPlayerMuted(target)){
+                player.sendMessage(Main.getInstance().elementa +"Le joueur : "+ChatColor.RED + ChatColor.BOLD+ targetName + " est mute" );
+
+            }else {
+                player.sendMessage(Main.getInstance().elementa +"Le joueur : " +ChatColor.RED + ChatColor.BOLD+ targetName + " n'est pas mute" );
+            }
+
+        }
+
+        if (arg.equalsIgnoreCase("unmute")) {
+            if (!player.hasPermission("elemanta.mod")) {
+                player.sendMessage(Main.getInstance().elementa + ChatColor.RED + "Vous n'avez pas la permission de faire cela");
+                return false;
+            }
+            if (args.length != 1) {
+                player.sendMessage(Main.getInstance().elementa + ChatColor.GRAY + "Veuillez préciser le pseudo d'un joueur");
+                return false;
+            }
+            String targetName = args[0];
+            Player target = Bukkit.getPlayer(targetName);
+            UUID targetUUID = target.getUniqueId();
+
+            if (Main.getInstance().isPlayerMuted(target)){
+                Main.getInstance().mutedPlayers.remove(targetUUID);
+                player.sendMessage(Main.getInstance().elementa +"Vous avez unmute joueur : " +ChatColor.RED + ChatColor.BOLD+ targetName );
+            }else{
+                player.sendMessage(Main.getInstance().elementa +"Le joueur : " +ChatColor.RED + ChatColor.BOLD+ targetName + " n'est pas mute");
+            }
+
+
+        }
+
+        if (arg.equalsIgnoreCase("tempmute")) {
+            if (!player.hasPermission("elemanta.mod")) {
+                player.sendMessage(Main.getInstance().elementa + ChatColor.RED + "Vous n'avez pas la permission de faire cela");
+                return false;
+            }
+            if (args.length != 1) {
+                player.sendMessage(Main.getInstance().elementa + ChatColor.GRAY + "Veuillez préciser le pseudo d'un joueur");
+                return false;
+            }
+
+
+            String targetName = args[0];
+            Player target = Bukkit.getPlayer(targetName);
+            UUID targetUUID = target.getUniqueId();
+            String reason = "";
+            int idTemps = 0;
+
+            for (int i = 1; i < args.length ; i++) {
+                reason = reason +" "+ args[i];
+                idTemps = i;
+            }
+
+        }
+
+        if (arg.equalsIgnoreCase("timelast")) {
+            if (!player.hasPermission("elemanta.mod")) {
+                player.sendMessage(Main.getInstance().elementa + ChatColor.RED + "Vous n'avez pas la permission de faire cela");
+                return false;
+            }
+            if (args.length != 1) {
+                player.sendMessage(Main.getInstance().elementa + ChatColor.GRAY + "Veuillez préciser le pseudo d'un joueur");
+                return false;
+            }
+
+
+            String targetName = args[0];
+            Player target = Bukkit.getPlayer(targetName);
+            UUID targetUUID = target.getUniqueId();
+            long timeLeftParse = Main.getInstance().mutedPlayers.get(targetUUID) +3600000L;
+
+            Bukkit.getConsoleSender().sendMessage("" + timeLeftParse );
+        }
 
 
 

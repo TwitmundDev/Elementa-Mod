@@ -31,3 +31,18 @@ commands:
 
   s:
     description: tp un joueur sur sois
+
+  mute:
+    description: mute un joueur
+
+  showmuted:
+    description: Afficher tout les mute du serveur
+
+  ismuted:
+    description: Affiche si un joueur est mute
+
+  unmute:
+    description: Demute un joueur
+
+  timelast:
+    description: Affiche le temps restant du mute d'un joueur
