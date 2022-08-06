@@ -37,9 +37,12 @@ public class ReachA implements Listener {
             double delta = this.lastPos.distance(e.getDamager().getLocation());
             double reach = e.getEntity().getLocation().distance(e.getDamager().getLocation());
             DecimalFormat numberFormat = new DecimalFormat("#.00");
-            String reachNotification = numberFormat.format(reach-0.30);
-            if (reach > 3.30D) {
-                Main.getInstance().notification("reach" ,(Player) e.getDamager() , "" , reachNotification);
+            String reachNotification = numberFormat.format(  reach );
+            double distanceBetween = e.getEntity().getLocation().getZ() - e.getDamager().getLocation().getZ();
+            if (reach > 3.20D + delta) {
+                Bukkit.broadcastMessage("" + distanceBetween);
+                Main.getInstance().notification("reach" ,(Player) e.getDamager() , 2 , reachNotification);
+                e.setCancelled(true);
             }
         }
         this.lastPos = e.getDamager().getLocation();

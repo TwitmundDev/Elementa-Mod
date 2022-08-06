@@ -10,6 +10,7 @@ import org.apache.commons.dbcp2.BasicDataSource;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
@@ -111,7 +112,7 @@ public final class Main extends JavaPlugin {
 
 
 
-    public void notification(@NotNull String notification,@NotNull Player player , String warningLvl, String reachlvl){
+    public void notification(@NotNull String notification,@NotNull Player player , double warningLvl, String reachlvl){
         instance = this;
         for (Player players : Bukkit.getOnlinePlayers()) {
             if (players.hasPermission("elementa.Wanrings")) {
@@ -120,18 +121,21 @@ public final class Main extends JavaPlugin {
                     case "reach":
                         players.sendMessage( Main.getInstance().elementa + ChatColor.GRAY + "Le joueur : "
                                 + ChatColor.RED + ChatColor.BOLD + player.getDisplayName()
-                                +ChatColor.RESET + ChatColor.GRAY + "est suspecter de " + notification + " " + warningLvl+
+                                +ChatColor.RESET + ChatColor.GRAY + " est suspecter de " + notification + " " + warningLvl+
                                 "\n Reach de " + reachlvl);
+                                player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP , 60.0f, 4f);
                             break;
                     default:
                         players.sendMessage( Main.getInstance().elementa + ChatColor.GRAY + "Le joueur : " + ChatColor.RED + ChatColor.BOLD + player.getDisplayName()
-                                +ChatColor.RESET + ChatColor.GRAY + " est suspecter de " + notification + " " + warningLvl);
+                                +ChatColor.RESET + ChatColor.GRAY + "est suspecter de " + notification + " " + warningLvl);
                         break;
                 }
 
 
             }
         }
+
+
     }
 
 
