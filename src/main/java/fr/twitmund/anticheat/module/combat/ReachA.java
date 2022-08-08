@@ -40,7 +40,7 @@ public class ReachA implements Listener {
             String reachNotification = numberFormat.format(  reach );
             double distanceBetween = e.getEntity().getLocation().getZ() - e.getDamager().getLocation().getZ();
             if (reach > 3.20D + delta) {
-                Bukkit.broadcastMessage("" + distanceBetween);
+                //Bukkit.broadcastMessage("" + distanceBetween);
                 Main.getInstance().notification("reach" ,(Player) e.getDamager() , 2 , reachNotification);
                 e.setCancelled(true);
             }
