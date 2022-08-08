@@ -46,3 +46,6 @@ commands:
 
   timelast:
     description: Affiche le temps restant du mute d'un joueur
+
+  spawnnpc:
+    description: Fais spawn un npc

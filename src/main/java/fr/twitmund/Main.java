@@ -6,6 +6,7 @@ import fr.twitmund.db.Reports;
 import fr.twitmund.db.Warns;
 import fr.twitmund.managers.EventManager;
 import fr.twitmund.managers.PlayerManager;
+import fr.twitmund.npc.Command;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -71,6 +72,9 @@ public final class Main extends JavaPlugin {
         getCommand("heal").setExecutor(new Commands());
         getCommand("s").setExecutor(new Commands());
 
+        //Commande NPC
+        getCommand("spawnnpc").setExecutor(new Command());
+
 
         new EventManager().registers();
         initConnection();
@@ -121,8 +125,8 @@ public final class Main extends JavaPlugin {
                     case "reach":
                         players.sendMessage( Main.getInstance().elementa + ChatColor.GRAY + "Le joueur : "
                                 + ChatColor.RED + ChatColor.BOLD + player.getDisplayName()
-                                +ChatColor.RESET + ChatColor.GRAY + " est suspecter de " + notification + " " + warningLvl+
-                                "\n Reach de " + reachlvl);
+                                +ChatColor.RESET + ChatColor.GRAY + " est suspecter de " + notification + " " + warningLvl
+                        + entreCrochet(reachlvl ,ChatColor.RED, true,false));
                                 player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP , 60.0f, 4f);
                             break;
                     default:
@@ -210,6 +214,19 @@ public final class Main extends JavaPlugin {
         }
 
         return isMuted;
+    }
+
+    public String entreCrochet(String message ,ChatColor colorMessage , boolean spacebefore , boolean spaceafter){
+        String result = ChatColor.GRAY + "[" + colorMessage + message + ChatColor.GRAY + "]";
+        if (spaceafter){
+            return ChatColor.GRAY + "[" + colorMessage + message + ChatColor.GRAY + "] ";
+        } else if (spacebefore) {
+            return ChatColor.GRAY + " [" + colorMessage + message + ChatColor.GRAY + "]";
+        }else if (spacebefore && spaceafter == true) {
+            return ChatColor.GRAY + " [" + colorMessage + message + ChatColor.GRAY + "] ";
+        }
+
+        return result;
     }
 
 
