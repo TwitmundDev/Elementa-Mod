@@ -1,11 +1,9 @@
-
 # Elementa Modearation
+Ancien plugin créé pour mon ancien projet nommé Elementa.
 
-Plugin Eelemanta Modearation crée par Twitmund
+Plugin Eelemanta Modearation crée par Twitmund.
 
 # Fonctionne en 1.12.2
-
-
 
 
 ## Authors
